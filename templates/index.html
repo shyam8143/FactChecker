@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TruthCheck AI — Fact-Checker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">&#9878;</span>
+      <div>
+        <h1>TruthCheck <span class="ai-tag">AI</span></h1>
+        <p class="tagline">Fact-check social media posts &amp; news headlines</p>
+      </div>
+    </div>
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn active" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="hi">हिन्दी</button>
+      <button class="lang-btn" data-lang="te">తెలుగు</button>
+      <button class="lang-btn" data-lang="ta">தமிழ்</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="feed">
+      <article class="card input-card">
+        <div class="post-header">
+          <div class="avatar">&#128272;</div>
+          <div class="post-meta">
+            <strong>TruthCheck Scanner</strong>
+            <span>AI Fact-Checker &middot; Gemini powered</span>
+          </div>
+        </div>
+
+        <label class="sr-only" for="claimInput">Paste a claim to fact-check</label>
+        <textarea id="claimInput" rows="4"
+          placeholder="Paste a social media post or news headline here...&#10;&#10;e.g. Drinking lemon water daily cures cancer."></textarea>
+
+        <div class="input-actions">
+          <button id="pasteBtn" class="ghost-btn" title="Paste from clipboard">&#128203; Paste</button>
+          <span id="charCount">0 / 3000</span>
+        </div>
+
+        <button id="checkBtn" class="primary-btn">
+          <span class="btn-label">Check this claim</span>
+          <span class="spinner hidden" aria-hidden="true"></span>
+        </button>
+        <p id="errorMsg" class="error hidden"></p>
+      </article>
+
+      <div id="resultWrap" class="hidden" aria-live="polite">
+        <article class="card result-card" id="resultCard">
+          <div class="result-top">
+            <div class="verdict-badge" id="verdictBadge">UNVERIFIED</div>
+            <div class="confidence">
+              <div class="confidence-ring" id="confidenceRing">
+                <span id="confidenceText">0%</span>
+              </div>
+              <p>Confidence</p>
+            </div>
+          </div>
+
+          <p class="checked-claim" id="checkedClaim"></p>
+
+          <h3 class="section-title">Why</h3>
+          <p class="explanation" id="explanation"></p>
+
+          <h3 class="section-title">Verify with trusted sources</h3>
+          <ul class="sources" id="sources"></ul>
+
+          <p class="disclaimer">
+            AI-generated analysis. Always cross-verify with official sources before sharing.
+          </p>
+        </article>
+      </div>
+
+      <article class="card history-card">
+        <div class="history-head">
+          <h2>&#128220; Recent checks</h2>
+          <button id="clearBtn" class="ghost-btn">Clear</button>
+        </div>
+        <div id="historyList">
+          <p class="empty-state">No checks yet. Paste a claim above to get started!</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Built for Hackathon &middot; Powered by Google Gemini
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
