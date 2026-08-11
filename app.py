@@ -196,7 +196,10 @@ def check():
 
     if not GEMINI_API_KEY:
         result = fallback_result()
-        result["explanation"] = "GEMINI_API_KEY not found. Add it to your .env file, then try again."
+        result["explanation"] = (
+            "GEMINI_API_KEY not found. On Vercel, set it in Project > Settings > Environment "
+            "Variables (key must start with AIza) and redeploy; locally, add it to .env."
+        )
     else:
         try:
             result = parse_verdict(check_fact(claim, lang))
